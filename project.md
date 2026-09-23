@@ -8,12 +8,15 @@
 
 ## **1. Business Context**
 
-Your bank's digital payments team is implementing a real-time payment that has peak a throughput of 1000 messages/sec streaming system to enable:
+Your bank's digital payments team is implementing a real-time event streaming system to enable:
 
 - **Real-time payments** (lag < 150ms)
 - **Real-time fraud detection** (lag < 50ms)
 - **Immediate customer notifications** (lag < 2s)
 - **Regulatory compliance & audit** (7-year retention for fraud and payment events)
+- **Target peak throughput of 1000Mb/s**
+- **Assumption single instance producer throughput 100Mb/s for all producers**
+- **Assumption single instance consumer throughput 10Mb/s for all consumers**
 
 
 Currently, payment processing is synchronous and tightly coupled. The new Kafka-based architecture will decouple these concerns and enable independent scaling of fraud detection and notifications.
@@ -105,9 +108,6 @@ You must **design and justify** the following topic configuration decisions:
 
 8. **Message Schema:** What fields does a payment event need?
    - Consider: what information is required for fraud detection, notifications, reconciliation, and audit?
-   - What fields are PII and should be redacted?
-   - What's optional vs. required?
-   - Design a schema (JSON, Avro, or Protobuf) and justify field choices
 
 ---
 
